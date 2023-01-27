@@ -43,14 +43,13 @@ def get_route_cost(route_coordinate, game_map):
     """
     # Build a path from start to end that looks like [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 4)]
     width = max(game_map.shape[0],game_map.shape[1])
+    grid = Grid(width=width, height=width) #In order to configure this library you had to make it an even grid square
     
-    grid = Grid(width=width, height=width)
-    
-    start = grid.node(route_coordinate[0][0], route_coordinate[0][1])
-    end = grid.node(route_coordinate[1][0], route_coordinate[1][1])
+    source = grid.node(route_coordinate[0][0], route_coordinate[0][1]) #This configures the source of city1 that we start
+    destination = grid.node(route_coordinate[1][0], route_coordinate[1][1]) #This is the destination we wish to reach
     
     finder = AStarFinder(diagonal_movement=DiagonalMovement.always)
-    path, _ = finder.find_path(start, end, grid)
+    path, _ = finder.find_path(source, destination, grid)
 
     return game_map[tuple(zip(*path))].sum()
 
