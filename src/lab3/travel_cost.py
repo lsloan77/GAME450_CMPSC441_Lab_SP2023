@@ -7,6 +7,7 @@ on the difficulty of the terrain.
 In this lab, you will write a function that calculates the cost of a route between two cities,
 A terrain is generated for you 
 '''
+#pip install pathfinding for the bash
 import numpy as np
 from pathfinding.core.diagonal_movement import DiagonalMovement
 from pathfinding.core.grid import Grid
