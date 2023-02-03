@@ -45,7 +45,12 @@ class AiPlayer(Player):
         self.initial_weapon = random_weapon_select()
     
     def weapon_selecting_strategy(self):
-        pass
+        if len(self.opponent_choices) == 0: #in class for Single and Switch
+            return self.initial_weapon
+        if len(self.opponent_choices) >= 2: #On my own Mimic
+            if (self.opponent_choices[-1] == self.my_choices[-2]): #Considering a previous condition to look if I am being mimicked
+                return (self.my_choices[-1]+1)%3 #this should consider my last input that the AI will use for the next game
+        return (self.opponent_choices[-1]+1)%3 
 
 
 if __name__ == '__main__':
@@ -59,3 +64,4 @@ if __name__ == '__main__':
                 final_tally[agent] += tally[0]/sum(tally)
 
     print("Final tally: ", final_tally)  
+    
