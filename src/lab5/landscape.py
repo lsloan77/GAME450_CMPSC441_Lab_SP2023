@@ -2,11 +2,13 @@ import matplotlib.pyplot as plt
 from perlin_noise import PerlinNoise
 import numpy as np
 
+
+
 def get_elevation(size):
     xpix, ypix = size
     #changed the octaves
     #kept the seed at 2 to keep it static
-    noise = PerlinNoise(octaves=10, seed=2)
+    noise = PerlinNoise(octaves=5, seed=2)
     elevation = np.array([[noise([i/xpix, j/ypix]) for j in range(ypix)] for i in range (xpix)])
     '''Play around with perlin noise to get a better looking landscape (This is required for the lab)'''
 

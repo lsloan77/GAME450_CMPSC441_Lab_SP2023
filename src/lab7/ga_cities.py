@@ -19,9 +19,9 @@ from pathlib import Path
 
 sys.path.append(str((Path(__file__) / ".." / ".." / "..").resolve().absolute()))
 
-from src.lab5.landscape import elevation_to_rgba
+from src.lab5.landscape import elevation_to_rgba, get_elevation
 
-
+##cities is soultion
 def game_fitness(cities, idx, elevation, size):
     fitness = 0.0001  # Do not return a fitness of 0, it will mess up the algorithm.
     """
@@ -30,6 +30,36 @@ def game_fitness(cities, idx, elevation, size):
     2. The cities should have a realistic distribution across the landscape
     3. The cities may also not be on top of mountains or on top of each other
     """
+    
+    
+        
+            
+    cityLoc = solution_to_cities(cities, size)
+    #Consider a location to be where x and y meets for a dot
+    #Check for that many dots on a map
+    for(x,y) in cityLoc:
+        #Based on my analysis, if it less than .55 then it is likely in water
+        if(elevation[x][y] <= .55):
+            fit = .0000001
+            fitness = fit + fitness
+        #Based on my analysis, if it more than .7 then it is likely on a mountain
+        if(elevation[x][y] >= .7):
+            fit = .0000001
+            fitness = fit + fitness
+        #Considers the fitness based of the realistic amount of distance cities can be near each other
+        #I set the bound to 25
+        dist = x - y
+        if(dist <= 25):
+            fit = .000001
+            fitness = fit + fitness
+        else:
+            fit = .001
+            fitness = fit + fitness
+            
+        
+            
+        
+    
     return fitness
 
 
@@ -114,7 +144,9 @@ if __name__ == "__main__":
     size = 100, 100
     n_cities = 10
     elevation = []
+    elevation = get_elevation(size)
     """ initialize elevation here from your previous code"""
+    #elevation = get_elevation
     # normalize landscape
     elevation = np.array(elevation)
     elevation = (elevation - elevation.min()) / (elevation.max() - elevation.min())
