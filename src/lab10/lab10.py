@@ -26,7 +26,7 @@ x_train, x_test, y_train, y_test = train_test_split(
 )
 
 """ Train a sklearn model here. """
-sklearn_model = 3
+sklearn_model = 2
 kn = KNeighborsClassifier(n_neighbors=sklearn_model)
 kn.fit(x_train, y_train)
 print("Accuracy of model: {}\n".format(kn.score(x_test, y_test)))
