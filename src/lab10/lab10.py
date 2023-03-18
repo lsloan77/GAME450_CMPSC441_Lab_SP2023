@@ -5,12 +5,13 @@ Train a model to predict whether a person has heart disease or not and test its 
 You can usually improve the model by normalizing the input data. Try that and see if it improves the performance. 
 """
 from sklearn.metrics import confusion_matrix
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
+from sklearn.preprocessing import StandardScaler
 import numpy as np
 
-data = pd.read_csv("src/lab8/heart.csv")
+data = pd.read_csv("src/lab10/heart.csv")
 
 # Transform the categorical variables into dummy variables.
 print(data.head())
@@ -25,13 +26,19 @@ x_train, x_test, y_train, y_test = train_test_split(
 )
 
 """ Train a sklearn model here. """
-
-sklearn_model = None
-
-# Accuracy
-print("Accuracy of model: {}\n".format(sklearn_model.score(x_test, y_test)))
-
+sklearn_model = 3
+kn = KNeighborsClassifier(n_neighbors=sklearn_model)
+kn.fit(x_train, y_train)
+print("Accuracy of model: {}\n".format(kn.score(x_test, y_test)))
+#sklearn_model = None
+#print("Accuracy of model: {}\n".format(sklearn_model.score(x_test, y_test)))
+#print("Accuracy of model: {}\n".format(sklearn_model.score(x_test, y_test)))
 
 """ Improve the model by normalizing the input data. """
+scaler = StandardScaler()
+x_train_scaled = scaler.fit_transform(x_train)
+x_test_scaled = scaler.transform(x_test)
 
-print("Accuracy of improved model: {}\n".format(sklearn_model.score(x_test, y_test)))
+kn_normalized = KNeighborsClassifier(n_neighbors=3)
+kn_normalized.fit(x_train_scaled, y_train)
+print("Accuracy of normalized model: {}\n".format(kn_normalized.score(x_test_scaled, y_test)))
