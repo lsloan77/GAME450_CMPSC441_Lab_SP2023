@@ -20,4 +20,3 @@ class PyGameAICombatPlayer(PyGameAIPlayer):
         damage = random.randint(10, 30)
         target.health -= damage
         return damage
-
