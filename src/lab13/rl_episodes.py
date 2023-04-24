@@ -74,8 +74,27 @@ def run_episodes(n_episodes):
         Return the action values as a dictionary of dictionaries where the keys are states and 
             the values are dictionaries of actions and their values.
     '''
+    def run_episodes(n_episodes):
+        action_values = defaultdict(lambda: defaultdict(float))
+        action_counts = defaultdict(lambda: defaultdict(int))
 
-    return action_values
+        player = PyGameRandomCombatPlayer("Player")
+        opponent = PyGameComputerCombatPlayer("Opponent")
+
+        for _ in range(n_episodes):
+            history = run_random_episode(player, opponent)
+            returns = get_history_returns(history)
+
+        for state in returns:
+            for action, ret in returns[state].items():
+                action_values[state][action] += ret
+                action_counts[state][action] += 1
+
+        for state in action_values:
+            for action in action_values[state]:
+                action_values[state][action] /= action_counts[state][action]
+
+        return action_values
 
 
 def get_optimal_policy(action_values):
