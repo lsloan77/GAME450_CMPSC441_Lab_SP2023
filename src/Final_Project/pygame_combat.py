@@ -3,10 +3,10 @@ from pathlib import Path
 import sys
 sys.path.append(str((Path(__file__) / ".." / "..").resolve().absolute()))
 
-from lab11.sprite import Sprite
-from lab11.turn_combat import CombatPlayer, Combat
-from lab11.pygame_ai_player import PyGameAICombatPlayer
-from lab11.pygame_human_player import PyGameHumanCombatPlayer
+from Final_Project.sprite import Sprite
+from Final_Project.turn_combat import CombatPlayer, Combat
+from Final_Project.pygame_ai_player import PyGameAICombatPlayer
+from Final_Project.pygame_human_player import PyGameHumanCombatPlayer
 
 AI_SPRITE_PATH = Path("assets/ai.png")
 

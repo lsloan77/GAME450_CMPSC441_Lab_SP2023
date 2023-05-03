@@ -1,2 +1,2 @@
-from src.lab11.agent_environment import run
+from src.Final_Project.agent_environment import run
 run()
