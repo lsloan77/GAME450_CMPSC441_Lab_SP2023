@@ -54,6 +54,7 @@ if __name__ == '__main__':
     '''print the cities and routes'''
     coordinates = get_randomly_spread_cities((100, 200), len(city_names))
     unique_paths = get_routes(city_names)
+    print(coordinates)
     print('Cities:')
     for i, city in enumerate(coordinates):
         print(f'{city_names[i]}: {city}')
