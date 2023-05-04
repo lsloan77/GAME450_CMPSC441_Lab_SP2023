@@ -260,8 +260,12 @@ def run():
     my_list = ELEVATION.tolist()
     #habitable = [(i, j) for i in range(len(my_list)) for j in range(len(my_list[0])) if my_list[i][j] > 0]
     #cities = random.sample(habitable, len(city_names))
+    
+    #GA Integration
     cities = Lab7(len(city_names), ELEVATION, size)
     routes = get_routes(cities)
+    
+    
     #routes = get_routes(city_names)
 
     random.shuffle(routes)
